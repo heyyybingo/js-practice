@@ -12,13 +12,7 @@
 // const dlog = new DelayLog()
 // dlog.wait(1000).log('hello1').wait(2000).log('world1')
 // dlog.wait(1000).log('hello2').wait(2000).log('world2')
-function isThenable(p) {
-  return (
-    p &&
-    (typeof p === "object" || typeof p === "function") &&
-    typeof p.then === "function"
-  );
-}
+
 class DelayLog {
   promise;
   logTask = [];

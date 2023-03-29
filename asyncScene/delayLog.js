@@ -2,7 +2,7 @@
  * @Author: heyyybingo 283385508@qq.com
  * @Date: 2023-03-29 16:59:07
  * @LastEditors: heyyybingo 283385508@qq.com
- * @LastEditTime: 2023-03-29 19:40:11
+ * @LastEditTime: 2023-03-29 22:57:06
  * @FilePath: /js-practice/asyncScene/delayLog.js
  * @Description: 实现一个延时打印日志的功能
  *
@@ -10,13 +10,7 @@
  */
 
 // new DelayLog().wait(1000).log('after 1s').wait('2000').log('after 3s')
-function isThenable(p) {
-  return (
-    p &&
-    (typeof p === "object" || typeof p === "function") &&
-    typeof p.then === "function"
-  );
-}
+
 class DelayLog {
   promiseQueue = [Promise.resolve()];
   wait(time) {
