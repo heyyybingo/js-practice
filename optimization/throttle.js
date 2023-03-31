@@ -2,7 +2,7 @@
  * @Author: heyyybingo 283385508@qq.com
  * @Date: 2023-03-29 14:48:13
  * @LastEditors: heyyybingo 283385508@qq.com
- * @LastEditTime: 2023-03-29 21:40:45
+ * @LastEditTime: 2023-03-31 16:18:30
  * @FilePath: /js-practice/optimization/throttle.js
  * @Description: 实现一个节流函数，n秒内只能执行一次
  *
@@ -16,7 +16,7 @@ function throttle(fn, delay) {
       return;
     }
     isStop = true;
-    fn.call(this, ...arguments);
+    fn.apply(this, arguments);
     setTimeout(() => {
       isStop = false;
     }, delay);

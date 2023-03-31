@@ -2,7 +2,7 @@
  * @Author: heyyybingo 283385508@qq.com
  * @Date: 2023-03-29 14:48:09
  * @LastEditors: heyyybingo 283385508@qq.com
- * @LastEditTime: 2023-03-29 21:39:40
+ * @LastEditTime: 2023-03-31 16:18:20
  * @FilePath: /js-practice/optimization/debounce.js
  * @Description: 防抖函数,n秒后触发，重复触发点则重新计时
  *
@@ -20,7 +20,7 @@ function debounce(fn, delay) {
   return function () {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      fn.call(this, ...arguments);
+      fn.apply(this, arguments);
     }, delay);
   };
 }
