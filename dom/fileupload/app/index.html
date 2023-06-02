@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .area{
+            margin:40px 20px;
+            padding:10px;
+            border:1px solid grey;
+            border-radius: 24px;
+        }
+        .upload-btn{
+            display: inline-block;
+            padding: 10px 10px 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="area">
+        <h3>form上传</h3>
+        
+        <form action="/form" method="post" enctype="multipart/form-data">
+            <input name="name" />
+            <input name="form-file" type="file" class="upload-btn" multiple />
+            <button type="submit">上传</button>
+        </form>
+    </div>
+    <div class="area">
+        <h3>单个上传</h3>
+        <input id="upload-single" type="file"   />
+        <button>上传</button>
+    </div>
+    <div class="area">
+        <h3>多个上传</h3>
+        <input id="upload-mult" type="file"  multiple  />
+        <button id="btn-mult">上传</button>
+    </div>
+
+    <script src="./index.js" ></script>
+</body>
+</html>
