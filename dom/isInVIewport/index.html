@@ -1,3 +1,13 @@
+<!--
+ * @Author: heyyybingo 283385508@qq.com
+ * @Date: 2023-04-05 16:01:12
+ * @LastEditors: heyyybingo 283385508@qq.com
+ * @LastEditTime: 2023-05-11 12:47:01
+ * @FilePath: /js-practice/dom/isInVIewport/index.html
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by heyyybingo, All Rights Reserved. 
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +15,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./isInViewport.js"></script>
+    <script defer src="./isInViewport.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div
+      id="container"
+      style="height: 400px; overflow: scroll; border: 1px solid grey"
+    >
+      <div style="height: 900px">
+        <div style="height: 500px"></div>
+        <div
+          id="child"
+          style="width: 200px; height: 200px; background-color: red"
+        ></div>
+      </div>
+    </div>
+    <button id="getChildBtn">GET CHILD POS</button>
+  </body>
 </html>

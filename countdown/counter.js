@@ -2,11 +2,22 @@
  * @Author: heyyybingo 283385508@qq.com
  * @Date: 2023-04-05 16:24:54
  * @LastEditors: heyyybingo 283385508@qq.com
- * @LastEditTime: 2023-04-05 22:55:56
+ * @LastEditTime: 2023-04-22 17:36:10
  * @FilePath: /js-practice/countdown/counter.js
  * @Description:实现一个计时器
  *
  * Copyright (c) 2023 by heyyybingo, All Rights Reserved.
+ */
+
+/**
+ * 如果考虑页面切换，可以使用类似下述方法监听，但是有一个api设计上的问题，手动停止和自动的切换停止需要区分开来
+ * document.onvisibilitychange(() => {
+      if (document.hidden) {
+        this.stop();
+      } else {
+        this.start();
+      }
+    });
  */
 
 class Counter {
@@ -18,6 +29,7 @@ class Counter {
   constructor(time) {
     this.initTime = time;
     this.time = time;
+   
   }
 
   start() {

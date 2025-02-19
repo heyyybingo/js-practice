@@ -2,8 +2,8 @@
  * @Author: heyyybingo 283385508@qq.com
  * @Date: 2023-03-29 15:21:52
  * @LastEditors: heyyybingo 283385508@qq.com
- * @LastEditTime: 2023-03-29 21:17:12
- * @FilePath: /js-practice/asyncScene/promise.js
+ * @LastEditTime: 2023-04-22 17:16:54
+ * @FilePath: /js-practice/asyncScene/promise/promise.js
  * @Description: 实现一个promise
  *
  * Copyright (c) 2023 by heyyybingo, All Rights Reserved.
@@ -70,6 +70,8 @@ class MyPromise {
           if (thenCallBackResult instanceof MyPromise) {
             thenCallBackResult.then(resolve, reject);
           } else {
+            // 如果thenCallBackResult不是一个promise的话，resolve不会被当作一次微任务调度，可以使用queueMicrotask 这个api调度
+            //queueMicrotask(()=>resolve(thenCallBackResult))
             resolve(thenCallBackResult);
           }
         } catch (e) {

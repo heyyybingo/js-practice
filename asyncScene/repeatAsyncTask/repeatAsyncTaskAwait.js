@@ -30,9 +30,11 @@ function asyncFetch() {
 async function asyncTryMultipleTimes(task, times = 0) {
   // 返回一个promise，resolve则直接成功，如果是reject，则需要判断
   let finallError = null;
+  // let res=null;
   do {
     try {
-      await task();
+      const res = await task();
+      return res;
     } catch (e) {
       times--;
       finallError = e;

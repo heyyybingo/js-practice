@@ -1,0 +1,32 @@
+<!--
+ * @Author: heyyybingo 283385508@qq.com
+ * @Date: 2023-05-17 21:18:07
+ * @LastEditors: heyyybingo 283385508@qq.com
+ * @LastEditTime: 2023-05-17 21:40:38
+ * @FilePath: /js-practice/dom/fileupload/index.html
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by heyyybingo, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+        <input id="single" type="file" placeholder="单文件 " />
+    <button id="submit">click</button>
+    </div>
+
+    <form id="myform" method="post" >
+        <input name="myformfile" id="mult" type="file" multiple placeholder="多文件" />
+        <input type="submit" value="mult submit">
+        </div>
+      </form>
+    <script src="./upload.js"></script>
+  </body>
+</html>

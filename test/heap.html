@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 3px;
+        }
+        .node text {
+            font: 12px sans-serif;
+        }
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 给定的堆结构
+        const heap = [
+            [0, -3], [0, -3], [0, -3], [0, -3],
+            [2, -3], [0, -3], [2, -3], [2, -3],
+            [0, 22], [2, 22], [2, -3], [0, 22],
+            [0, 35], [2, 22], [2, 56], [0, 22],
+            [2, 35], [0, 35], [2, 35], [2, 56],
+            [0, 22], [0, 22], [0, 35], [0, 56],
+            [0, 76], [0, 56], [0, 56], [2, 35],
+            [0, 76], [2, 76], [0, 35], [2, 22],
+            [0, 76], [2, 56], [2, 76], [0, 56],
+            [0, 76], [0, 56], [0, 76], [2, 76],
+            [0, 35], [2, 22], [2, 35], [2, 56],
+            [2, 76]
+        ];
+
+        // 将堆结构转换为树结构
+        function buildTree(index) {
+            if (index >= heap.length) return null;
+
+            const node = {
+                name: `[${heap[index][0]}, ${heap[index][1]}]`,
+                children: []
+            };
+
+            // 左子节点
+            const leftIndex = 2 * index + 1;
+            if (leftIndex < heap.length) {
+                node.children.push(buildTree(leftIndex));
+            }
+
+            // 右子节点
+            const rightIndex = 2 * index + 2;
+            if (rightIndex < heap.length) {
+                node.children.push(buildTree(rightIndex));
+            }
+
+            return node;
+        }
+
+        // 构建树
+        const treeData = buildTree(0);
+
+        // 设置画布大小
+        const width = 1000;
+        const height = 1000;
+
+        // 创建 SVG 画布
+        const svg = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // 创建树布局
+        const treeLayout = d3.tree().size([width, height]);
+
+        // 将树数据转换为 D3 的层次结构
+        const root = d3.hierarchy(treeData);
+
+        // 计算节点位置
+        treeLayout(root);
+
+        // 绘制连线
+        svg.selectAll(".link")
+            .data(root.links())
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkHorizontal()
+                .x(d => d.y)
+                .y(d => d.x)
+            );
+
+        // 绘制节点
+        const nodes = svg.selectAll(".node")
+            .data(root.descendants())
+            .enter()
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", d => `translate(${d.y},${d.x})`);
+
+        // 绘制节点圆圈
+        nodes.append("circle")
+            .attr("r", 10);
+
+        // 添加节点文本
+        nodes.append("text")
+            .attr("dy", "0.31em")
+            .attr("x", d => d.children ? -13 : 13)
+            .attr("text-anchor", d => d.children ? "end" : "start")
+            .text(d => d.data.name);
+    </script>
+</body>
+</html>
