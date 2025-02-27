@@ -19,8 +19,8 @@ function asyncFetch() {
   return new Promise((resolve, reject) => {
     console.log("do asyncFetch");
     setTimeout(() => {
-      //reject(new Error());
-      resolve(1);
+      reject(new Error());
+      //resolve(1);
     }, 0);
   });
 }
@@ -62,6 +62,7 @@ function* asyncTryMultipleTimes(task, times = 0) {
       // 提前退出
       return result;
     } catch (e) {
+      console.log("catch")
       times--;
       finallError = e;
     }
@@ -76,6 +77,6 @@ autoRun(function* () {
     const result = yield* asyncTryMultipleTimes(asyncFetch, 2);
     console.log("data end", result);
   } catch (e) {
-    console.log("err end", e);
+    console.log("err end");
   }
 });

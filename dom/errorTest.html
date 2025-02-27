@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        window.onerror=function(...args){
+            console.log("错误: ",...args)
+        }
+        window.addEventListener("unhandledrejection",function (...args){
+            console.log("unhandledrejection错误: ",...args)
+        })
+        Promise.reject()
+        throw new Error('')
+    </script>
+</body>
+</html>

@@ -14,21 +14,26 @@
  *
  * @description 定义异步任务
  */
+let ii=1
 function asyncFetch() {
-  return new Promise((resolve, reject) => {
+  const p= new Promise((resolve, reject) => {
     console.log("do asyncFetch");
     setTimeout(() => {
-      reject(new Error());
+      reject(new Error("mes"+ii));
       //resolve(1);
     }, 0);
   });
+  p.ii=ii++;
+  return p
 }
 
 /**
- * 运行异步任务迭代器(不使用生成器委托的形式)
+ * 运行异步任务迭代器(不使用生成器委托的形式),
+ * ! 这段代码问题看起来头大，要搞清楚主次，throw的时候控制流从autorun返回asyncTryMultipleTimes 的loop中，result为下一次yield的值
  * @param {*} taskGenerator
  */
 function autoRun(taskGenerator) {
+
   return new Promise((resolve, reject) => {
     const it = taskGenerator();
     let result = it.next();
@@ -45,8 +50,10 @@ function autoRun(taskGenerator) {
       }).catch((err) => {
         try {
           result = it.throw(err);
+          console.log("----a",result.value?.ii)
           doTaskResult();
         } catch (e) {
+          console.log("----b",e.message,err.message)
           reject(e);
         }
       });
@@ -61,10 +68,12 @@ function* asyncTryMultipleTimes(task, times = 0) {
   let finallError = null;
   do {
     try {
+      console.log("yield task")
       const result = yield task();
       // 提前退出
       return result;
     } catch (e) {
+      console.log("catch")
       times--;
       finallError = e;
     }
@@ -74,10 +83,10 @@ function* asyncTryMultipleTimes(task, times = 0) {
   throw finallError;
 }
 
-autoRun(function* () {
+autoRun(function* test() {
   try {
     const result = yield autoRun(
-      asyncTryMultipleTimes.bind(null, asyncFetch, 1)
+      asyncTryMultipleTimes.bind(null, asyncFetch, 2)
     );
     console.log("data end", result);
   } catch (e) {

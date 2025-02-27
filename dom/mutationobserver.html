@@ -1,0 +1,53 @@
+<!--  这是一个案例，表明mutation observer是个微任务 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <button id="btn">click</button>
+</body>
+
+<script>
+    const root = document.querySelector("#root")
+    const btn = document.querySelector("#btn")
+    let btnTimes=0;
+    btn.addEventListener("click",()=>{
+        callTimer()
+        root.innerHTML="click change "+btnTimes++
+        callPromise()
+        
+        
+    })
+
+    let pTimes=0
+    function callPromise(){
+        Promise.resolve().then(()=>{
+            console.log("promise called "+pTimes++)
+        })
+    }
+    let tTimes=0
+    function callTimer(){
+        setTimeout(()=>{
+            console.log("timer called "+tTimes++)
+        })
+    }
+    const observer = new MutationObserver(()=>{
+        console.log("mutation called")
+    })
+    observer.observe(root,{
+        subtree:true,
+        childList:true,
+        characterData:true
+    })
+    callTimer()
+    root.innerHTML="script changed"
+    
+    callPromise()
+   
+</script>
+</html>
